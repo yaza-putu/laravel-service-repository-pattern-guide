@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Service | Laravel Repository Service Pattern</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    
+    <meta name="description" content="Documentation Laravel Repository Service Pattern">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/docs/assets/css/0.styles.c5b1d19d.css" as="style"><link rel="preload" href="/docs/assets/js/app.7af79852.js" as="script"><link rel="preload" href="/docs/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/docs/assets/js/16.987135e4.js" as="script"><link rel="prefetch" href="/docs/assets/js/10.75d20fdc.js"><link rel="prefetch" href="/docs/assets/js/11.41372d0a.js"><link rel="prefetch" href="/docs/assets/js/12.bbfc5993.js"><link rel="prefetch" href="/docs/assets/js/13.8a33a16d.js"><link rel="prefetch" href="/docs/assets/js/14.344aca25.js"><link rel="prefetch" href="/docs/assets/js/15.cf597e43.js"><link rel="prefetch" href="/docs/assets/js/17.7de5825b.js"><link rel="prefetch" href="/docs/assets/js/18.ee836e0f.js"><link rel="prefetch" href="/docs/assets/js/3.7590745a.js"><link rel="prefetch" href="/docs/assets/js/4.da3ef268.js"><link rel="prefetch" href="/docs/assets/js/5.dac787d8.js"><link rel="prefetch" href="/docs/assets/js/6.2d0a63f8.js"><link rel="prefetch" href="/docs/assets/js/7.307492ca.js"><link rel="prefetch" href="/docs/assets/js/8.ff6fc406.js"><link rel="prefetch" href="/docs/assets/js/9.3c5a8fdb.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.c5b1d19d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"><!----> <span class="site-name">Laravel Repository Service Pattern</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/docs/config/" class="nav-link">
+  Config
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/docs/config/" class="nav-link">
+  Config
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/guide/" aria-current="page" class="sidebar-link">How It Works</a></li><li><a href="/docs/guide/Requirement.html" class="sidebar-link">Requirement</a></li><li><a href="/docs/guide/Installation.html" class="sidebar-link">Installation</a></li><li><a href="/docs/guide/Artisan.html" class="sidebar-link">Artisan Command</a></li><li><a href="/docs/guide/Repository.html" class="sidebar-link">Repository</a></li><li><a href="/docs/guide/Service.html" aria-current="page" class="active sidebar-link">Service</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#important" class="sidebar-link">Important</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#generate" class="sidebar-link">Generate</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#folder-structure" class="sidebar-link">Folder Structure</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#example-code-basic-service" class="sidebar-link">Example Code Basic Service</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#example-code-rest-api-service" class="sidebar-link">Example Code Rest Api Service</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#call-basic-service-in-controller" class="sidebar-link">Call Basic Service In Controller</a></li><li class="sidebar-sub-header"><a href="/docs/guide/Service.html#call-rest-api-service-in-controller" class="sidebar-link">Call Rest Api Service In Controller</a></li></ul></li><li><a href="/docs/guide/Uid.html" class="sidebar-link">Make Primary Key As UID string</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="service"><a href="#service" class="header-anchor">#</a> Service</h1> <h2 id="important"><a href="#important" class="header-anchor">#</a> Important</h2> <blockquote><p>Have 2 kind service</p></blockquote> <p>Have 2 kind services :</p> <ul><li>Basic Service</li> <li>Rest Api Service</li></ul> <blockquote><p>One service can call many repository, don't call model in service</p></blockquote> <p>Service only write bussiness logic not query logic</p> <p>Service can call many repository</p> <blockquote><p>Basic Operation CRUD like Create, Update, Delete, Find, FindOrFail, all already exist</p></blockquote> <p>You can override function in service implement class for basic operation CRUD function</p> <h2 id="generate"><a href="#generate" class="header-anchor">#</a> Generate</h2> <p>Basic Service</p> <div class="language-php extra-class"><pre class="language-php"><code>php artisan make<span class="token punctuation">:</span>service User
+<span class="token comment">// or</span>
+php artisan make<span class="token punctuation">:</span>service UserService
+</code></pre></div><p>Rest Api Service</p> <div class="language-php extra-class"><pre class="language-php"><code>php artisan make<span class="token punctuation">:</span>service UserService <span class="token operator">--</span>api
+</code></pre></div><p>more command <a href="/docs/guide/Artisan.html#make-basic-service">click here</a></p> <h2 id="folder-structure"><a href="#folder-structure" class="header-anchor">#</a> Folder Structure</h2> <blockquote><p>ex : Folder Structure UserService</p></blockquote> <pre class="vue-container"><code><p>.
+├── Services
+│   ├── User
+│   │   ├── <code>UserService</code> <em>(<strong>Interface</strong>)</em>
+│   │   ├── <code>UserServiceImplement</code> <em>(<strong>Class</strong>)</em>
+</p>
+</code></pre> <h2 id="example-code-basic-service"><a href="#example-code-basic-service" class="header-anchor">#</a> Example Code Basic Service</h2> <h3 id="interface"><a href="#interface" class="header-anchor">#</a> Interface</h3> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">LaravelEasyRepository<span class="token punctuation">\</span>BaseService</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name-definition class-name">UserService</span> <span class="token keyword">extends</span> <span class="token class-name">BaseService</span><span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * find by email service
+     * @param string $email
+     * @return User|null
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">findByEmail</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$email</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token operator">?</span><span class="token class-name return-type">User</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h3 id="class-implement"><a href="#class-implement" class="header-anchor">#</a> Class Implement</h3> <blockquote><p>service implement only call repository interface not call repository class implement</p></blockquote> <p>Basic CRUD already exists if extend Service Class</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Log</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">LaravelEasyRepository<span class="token punctuation">\</span>Service</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Repositories<span class="token punctuation">\</span>User<span class="token punctuation">\</span>UserRepository</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserServiceImplement</span> <span class="token keyword">extends</span> <span class="token class-name">Service</span> <span class="token keyword">implements</span> <span class="token class-name">UserService</span><span class="token punctuation">{</span>
+
+     <span class="token comment">/**
+     * don't change $this-&gt;mainRepository variable name
+     * because used in extends service class
+     */</span>
+     <span class="token keyword">protected</span> <span class="token variable">$mainRepository</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$mainRepository</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">mainRepository</span> <span class="token operator">=</span> <span class="token variable">$mainRepository</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * find by email service implement
+     * @param string $email
+     * @return User|null
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">findByEmail</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$email</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token operator">?</span><span class="token class-name return-type">User</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">mainRepository</span><span class="token operator">-&gt;</span><span class="token function">findByEmail</span><span class="token punctuation">(</span><span class="token variable">$email</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name class-name-fully-qualified"><span class="token punctuation">\</span>Exception</span> <span class="token variable">$exception</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name static-context">Log</span><span class="token operator">::</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token variable">$exception</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h2 id="example-code-rest-api-service"><a href="#example-code-rest-api-service" class="header-anchor">#</a> Example Code Rest Api Service</h2> <h3 id="interface-2"><a href="#interface-2" class="header-anchor">#</a> Interface</h3> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">LaravelEasyRepository<span class="token punctuation">\</span>BaseService</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name-definition class-name">UserService</span> <span class="token keyword">extends</span> <span class="token class-name">BaseService</span><span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * response
+     * @param string $email
+     * @return Response
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">findByEmail</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$email</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token class-name return-type">UserService</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h3 id="class-implement-2"><a href="#class-implement-2" class="header-anchor">#</a> Class Implement</h3> <blockquote><p>service implement only call repository interface not call repository class implement</p></blockquote> <p>Basic CRUD already exists if extend ServiceApi Class</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Repositories<span class="token punctuation">\</span>User<span class="token punctuation">\</span>UserRepository</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">LaravelEasyRepository<span class="token punctuation">\</span>ServiceApi</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserServiceImplement</span> <span class="token keyword">extends</span> <span class="token class-name">ServiceApi</span> <span class="token keyword">implements</span> <span class="token class-name">UserService</span><span class="token punctuation">{</span>
+
+     <span class="token comment">/**
+     * don't change $this-&gt;mainRepository variable name
+     * because used in extends service class
+     */</span>
+     <span class="token keyword">protected</span> <span class="token variable">$mainRepository</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token variable">$title</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;User&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token variable">$create_message</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;Berhasil Dibuat&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token variable">$update_message</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;Berhasil Diupdate&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token variable">$delete_message</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;Berhasil Dihapus&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserRepository</span> <span class="token variable">$mainRepository</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">mainRepository</span> <span class="token operator">=</span> <span class="token variable">$mainRepository</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * find by email service implement
+     * @param string $email
+     * @return User|null
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">findByEmail</span><span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$email</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token class-name return-type">UserService</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">mainRepository</span><span class="token operator">-&gt;</span><span class="token function">findByEmail</span><span class="token punctuation">(</span><span class="token variable">$email</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token constant boolean">true</span><span class="token punctuation">)</span>
+                        <span class="token operator">-&gt;</span><span class="token function">setCode</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+                        <span class="token operator">-&gt;</span><span class="token function">setResult</span><span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name class-name-fully-qualified"><span class="token punctuation">\</span>Exception</span> <span class="token variable">$exception</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">exceptionResponse</span><span class="token punctuation">(</span><span class="token variable">$exception</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h2 id="call-basic-service-in-controller"><a href="#call-basic-service-in-controller" class="header-anchor">#</a> Call Basic Service In Controller</h2> <blockquote><p>One controller can call many service</p></blockquote> <p>Controller don't call repository, only call service</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User<span class="token punctuation">\</span>UserService</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Request</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserController</span> <span class="token keyword">extends</span> <span class="token class-name">Controller</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token variable">$userService</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserService</span> <span class="token variable">$userService</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">userService</span> <span class="token operator">=</span> <span class="token variable">$userService</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * show all
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">userService</span><span class="token operator">-&gt;</span><span class="token function">findByEmail</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'rlegros@hotmail.com'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// more action</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre></div><h2 id="call-rest-api-service-in-controller"><a href="#call-rest-api-service-in-controller" class="header-anchor">#</a> Call Rest Api Service In Controller</h2> <blockquote><p>method -&gt;toJson() automatic return response as json</p></blockquote> <p>if you need get data from response service (only extend ServiceApi class) you can call 3 method :</p> <ul><li>-&gt;getResult() (to get all data)</li> <li>-&gt;getStatus() (to get status like true/false)</li> <li>-&gt;getCode() (to get code like 200)</li> <li>-&gt;getMessage() (to get message like success or error message)</li> <li>-&gt;toJson() (to generate json response api)</li></ul> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Services<span class="token punctuation">\</span>User<span class="token punctuation">\</span>UserService</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>JsonResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Request</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserController</span> <span class="token keyword">extends</span> <span class="token class-name">Controller</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token variable">$userService</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token class-name type-declaration">UserService</span> <span class="token variable">$userService</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">userService</span> <span class="token operator">=</span> <span class="token variable">$userService</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/**
+     * show all
+     * @return JsonResponse
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token class-name return-type">JsonResponse</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">userService</span><span class="token operator">-&gt;</span><span class="token function">findByEmail</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'rlegros@hotmail.com'</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">toJson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</span></code></pre></div><h3 id="result-method-tojson"><a href="#result-method-tojson" class="header-anchor">#</a> Result method -&gt;toJson()</h3> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2pockz3quxkw8s8w&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;tgrant&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;rlegros@hotmail.com&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;email_verified_at&quot;</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;details&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;sample&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;sample&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;sample&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;date&quot;</span><span class="token operator">:</span> <span class="token string">&quot;26-02-2023&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;created_at&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2023-02-26T06:57:34.000000Z&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;updated_at&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2023-02-26T06:57:34.000000Z&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/guide/Repository.html" class="prev">
+        Repository
+      </a></span> <span class="next"><a href="/docs/guide/Uid.html">
+        Make Primary Key As UID string
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.7af79852.js" defer></script><script src="/docs/assets/js/2.733019b2.js" defer></script><script src="/docs/assets/js/16.987135e4.js" defer></script>
+  </body>
+</html>

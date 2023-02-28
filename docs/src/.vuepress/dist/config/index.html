@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Config | Laravel Repository Service Pattern</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    
+    <meta name="description" content="Documentation Laravel Repository Service Pattern">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/docs/assets/css/0.styles.c5b1d19d.css" as="style"><link rel="preload" href="/docs/assets/js/app.7af79852.js" as="script"><link rel="preload" href="/docs/assets/js/2.733019b2.js" as="script"><link rel="preload" href="/docs/assets/js/10.75d20fdc.js" as="script"><link rel="prefetch" href="/docs/assets/js/11.41372d0a.js"><link rel="prefetch" href="/docs/assets/js/12.bbfc5993.js"><link rel="prefetch" href="/docs/assets/js/13.8a33a16d.js"><link rel="prefetch" href="/docs/assets/js/14.344aca25.js"><link rel="prefetch" href="/docs/assets/js/15.cf597e43.js"><link rel="prefetch" href="/docs/assets/js/16.987135e4.js"><link rel="prefetch" href="/docs/assets/js/17.7de5825b.js"><link rel="prefetch" href="/docs/assets/js/18.ee836e0f.js"><link rel="prefetch" href="/docs/assets/js/3.7590745a.js"><link rel="prefetch" href="/docs/assets/js/4.da3ef268.js"><link rel="prefetch" href="/docs/assets/js/5.dac787d8.js"><link rel="prefetch" href="/docs/assets/js/6.2d0a63f8.js"><link rel="prefetch" href="/docs/assets/js/7.307492ca.js"><link rel="prefetch" href="/docs/assets/js/8.ff6fc406.js"><link rel="prefetch" href="/docs/assets/js/9.3c5a8fdb.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.c5b1d19d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"><!----> <span class="site-name">Laravel Repository Service Pattern</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/docs/config/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Config
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/docs/config/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Config
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Config</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/config/#publish-config" class="sidebar-link">Publish Config</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/config/#config-location" class="sidebar-link">Config Location</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/config/#change-root-directory-of-service" class="sidebar-link">Change Root Directory Of Service</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/config/#change-root-directory-of-repository" class="sidebar-link">Change Root Directory Of Repository</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/config/#change-bind-interface-to-new-class-implement" class="sidebar-link">Change Bind Interface to New Class Implement</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="config"><a href="#config" class="header-anchor">#</a> Config</h1> <h2 id="publish-config"><a href="#publish-config" class="header-anchor">#</a> Publish Config</h2> <div class="language-php extra-class"><pre class="language-php"><code>php artisan vendor<span class="token punctuation">:</span>publish <span class="token operator">--</span>provider<span class="token operator">=</span><span class="token string double-quoted-string">&quot;LaravelEasyRepository\LaravelEasyRepositoryServiceProvider&quot;</span> <span class="token operator">--</span>tag<span class="token operator">=</span><span class="token string double-quoted-string">&quot;easy-repository-config&quot;</span>
+</code></pre></div><h2 id="config-location"><a href="#config-location" class="header-anchor">#</a> Config Location</h2> <p>Config.php</p> <blockquote><p>config &gt; easy-repository.php</p></blockquote> <h2 id="change-root-directory-of-service"><a href="#change-root-directory-of-service" class="header-anchor">#</a> Change Root Directory Of Service</h2> <blockquote><p>If Change Directory you need change namespace</p></blockquote> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">[</span>
+<span class="token operator">...</span><span class="token operator">.</span><span class="token operator">.</span>
+   <span class="token comment">/**
+     * The directory for all the services
+     */</span>
+    <span class="token string double-quoted-string">&quot;service_directory&quot;</span> <span class="token operator">=&gt;</span> <span class="token string double-quoted-string">&quot;app/Services&quot;</span><span class="token punctuation">,</span>
+    
+     <span class="token comment">/**
+     * Default service namespace
+     */</span>
+    <span class="token string double-quoted-string">&quot;service_namespace&quot;</span> <span class="token operator">=&gt;</span> <span class="token string double-quoted-string">&quot;App\Services&quot;</span><span class="token punctuation">,</span>
+<span class="token operator">...</span><span class="token operator">.</span><span class="token operator">.</span>
+</span></code></pre></div><h2 id="change-root-directory-of-repository"><a href="#change-root-directory-of-repository" class="header-anchor">#</a> Change Root Directory Of Repository</h2> <blockquote><p>If Change Directory you need change namespace</p></blockquote> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">[</span>
+<span class="token operator">...</span><span class="token operator">...</span>
+  <span class="token comment">/**
+     * The directory for all the repositories
+     */</span>
+    <span class="token string double-quoted-string">&quot;repository_directory&quot;</span> <span class="token operator">=&gt;</span> <span class="token string double-quoted-string">&quot;app/Repositories&quot;</span><span class="token punctuation">,</span>
+
+    <span class="token comment">/**
+     * Default repository namespace
+     */</span>
+    <span class="token string double-quoted-string">&quot;repository_namespace&quot;</span> <span class="token operator">=&gt;</span> <span class="token string double-quoted-string">&quot;App\Repositories&quot;</span><span class="token punctuation">,</span>
+<span class="token operator">...</span><span class="token operator">...</span>
+</span></code></pre></div><h2 id="change-bind-interface-to-new-class-implement"><a href="#change-bind-interface-to-new-class-implement" class="header-anchor">#</a> Change Bind Interface to New Class Implement</h2> <p>Add this config to AppServiceProvider</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">app</span><span class="token operator">-&gt;</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token keyword">Interface</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$service</span><span class="token punctuation">,</span> <span class="token variable">$app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">NewImplement</span><span class="token punctuation">(</span><span class="token variable">$service</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.7af79852.js" defer></script><script src="/docs/assets/js/2.733019b2.js" defer></script><script src="/docs/assets/js/10.75d20fdc.js" defer></script>
+  </body>
+</html>
