@@ -1,0 +1,19 @@
+{
+  "name": "doc-laravel-rsp",
+  "version": "0.0.1",
+  "description": "Documentation Laravel Repository Service Pattern",
+  "main": "index.js",
+  "authors": {
+    "name": "Yaza",
+    "email": "wayan13yasa@gmail.com"
+  },
+  "repository": "/doc-laravel-rsp",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
