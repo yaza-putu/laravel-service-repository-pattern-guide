@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src",
-    "publish": "npm run build && cp -r src/.vuepress/dist/* ../ && sed -i -e 's/src=\\//src=/g' ../index.html ; sed -i -e 's/href=\\//href=/g' ../index.html && rm -rf src/.vuepress/dist"
+    "publish": "npm run build && cp -r src/.vuepress/dist/* ../docs && sed -i -e 's/src=\\//src=/g' ../docs/index.html ; sed -i -e 's/href=\\//href=/g' ../docs/index.html && rm -rf src/.vuepress/dist"
   },
   "license": "MIT",
   "devDependencies": {
