@@ -23,9 +23,9 @@ php artisan make:service User
 // or
 php artisan make:service UserService
 ```
-Rest Api Service
+Create service with blank template
 ```php
-php artisan make:service UserService --api
+php artisan make:service UserService --blank
 ```
 more command [click here](./Artisan.md#make-basic-service)
 
@@ -41,7 +41,7 @@ more command [click here](./Artisan.md#make-basic-service)
 </code></pre>
 
 
-## Example Code Basic Service
+## Example Code Basic Service (Blank Template)
 ### Interface
 ```php
 <?php
@@ -106,7 +106,7 @@ class UserServiceImplement extends Service implements UserService{
 }
 ```
 
-## Example Code Rest Api Service
+## Example Code Rest Api Service (Default Template)
 ### Interface
 ```php
 <?php
@@ -162,9 +162,9 @@ class UserServiceImplement extends ServiceApi implements UserService{
     {
         try {
             $result = $this->mainRepository->findByEmail($email);
-            return $this->setStatus(true)
-                        ->setCode(200)
-                        ->setResult($result);
+            return $this->setCode(200)
+                        ->setMessage("OK")
+                        ->setData($result);
 
         } catch (\Exception $exception) {
             return $this->exceptionResponse($exception);
@@ -209,10 +209,12 @@ class UserController extends Controller
 > method ->toJson() automatic return response as json
 
 if you need get data from response service (only extend ServiceApi class) you can call 3 method :
-- ->getResult() (to get all data)
-- ->getStatus() (to get status like true/false)
+- ->getResult() (to get all data) (deprecated)
+- ->getStatus() (to get status like true/false) (deprecated)
 - ->getCode() (to get code like 200)
 - ->getMessage() (to get message like success or error message)
+- ->getData() (to get all data)
+- ->getError() (to get errors)
 - ->toJson() (to generate json response api)
 ```php
 <?php
@@ -244,6 +246,36 @@ class UserController extends Controller
 ```
 
 ### Result method ->toJson()
+> In version 5, message (key of json data) only for message can't use for validation error message, if you need read error message or validation error message use errors (key of json data)
+// new response
+```json
+{
+    "code": 200,
+    "message": "Ok",
+    "data": {
+        "id": "2pockz3quxkw8s8w",
+        "name": "tgrant",
+        "email": "rlegros@hotmail.com",
+        "email_verified_at": null,
+        "details": [
+            {
+                "sample": "1"
+            },
+            {
+                "sample": "2"
+            },
+            {
+                "sample": "3"
+            }
+        ],
+        "date": "26-02-2023",
+        "created_at": "2023-02-26T06:57:34.000000Z",
+        "updated_at": "2023-02-26T06:57:34.000000Z"
+    },
+    "errors": []
+}
+```
+// old response (deprecated)
 ```json
 {
     "success": true,

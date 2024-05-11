@@ -6,7 +6,7 @@ composer require yaza/laravel-repository-service
 ## Specific Version
 Version Available : [Click Here](README.md)
 ```php
-composer require yaza/laravel-repository-service:"^3.2"
+composer require yaza/laravel-repository-service:"^4.0"
 ```
 
 ## Publish Config (Important)

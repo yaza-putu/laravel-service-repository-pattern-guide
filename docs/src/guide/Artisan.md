@@ -25,7 +25,11 @@ Make service with repository
 php artisan make:service UserService --repository
 ```
 ## Make Api Service
-Make service for Rest API
+Default used api template
 ```php
-php artisan make:service UserService --api
+php artisan make:service UserService
+```
+or create service with blank template
+```php
+php artisan make:service UserService --blank
 ```
