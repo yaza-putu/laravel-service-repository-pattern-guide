@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src",
-    "gh-page": "VUEPRESS_BASE='/laravel-service-repository-pattern-guide/' && vuepress build src && rsync -a src/.vuepress/dist/* ../"
+    "gh-page": "vuepress build src && rsync -a src/.vuepress/dist/* ../"
   },
   "license": "MIT",
   "devDependencies": {
