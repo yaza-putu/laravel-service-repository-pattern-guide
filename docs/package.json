@@ -10,7 +10,8 @@
   "repository": "/doc-laravel-rsp",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src && mv src/.vuepress/dist/* ../"
+    "build": "vuepress build src",
+    "gh-page": "VUEPRESS_BASE='/laravel-service-repository-pattern-guide/' && vuepress build src && rsync -a src/.vuepress/dist/* ../"
   },
   "license": "MIT",
   "devDependencies": {
