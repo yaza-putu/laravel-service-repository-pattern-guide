@@ -2,7 +2,7 @@
 
 ## PHP Version
  <pre>
-<span style="color:white">8.2</span>
+<span style="color:white">8.4</span>
 </pre>
 ## Laravel & Package Version
 | Laravel Version       | Package Version |
