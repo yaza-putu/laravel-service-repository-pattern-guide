@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/985px-Laravel.svg.png
-tagline: Version 5.x
+tagline: Version 6.x
 actionText: Quick Start →
 actionLink: /guide/
 features:
